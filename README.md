@@ -1,46 +1,49 @@
-# Anoma SDK Elixir
+# Anoma SDK 🚀
 
-The Anoma SDK exposes an API for developers to create applications in Elixir on
-top of Anoma. The SDK exposes the core data structures (e.g., `Transaction`) and
-their operationg (e.g., `prove`).
+The official Anoma SDK for building intent-centric decentralized applications in Elixir.
 
+## ✨ Features
 
-## Repository Organisation
+- Intent-centric transaction creation
+- Zero-knowledge proof integration
+- Multi-chain support
+- Type-safe Elixir API
+- Comprehensive examples
 
-The repository is intended to be used as a plain Elixir dependency. The
-repository relies on Rustler to wrap the
-[arm-risc0](https://github.com/anoma/arm-risc0) repository and expose its
-functionality. See `native/arm` for its implementation.
+## 📦 Installation
 
-## Using the SDK
+Add to your `mix.exs`:
+{:anoma_sdk, github: "anoma/anoma-sdk"}
 
-Add the repository as a dependency in your `mix.exs`.
+Run: mix deps.get
 
-```elixir
-defp deps do
-  [
-    {:jason, git: "https://github.com/anoma/anoma-sdk"}
-  ]
-end
-```
+## 🚀 Quick Start
 
-To use the SDK, you need a few configuration parameters to create transactions.
-Consult the below table.
+Create transaction:
+{:ok, tx} = AnomaSDK.Transaction.create(%{from: "0x123...", to: "0x456...", amount: 100})
 
-Here's a markdown table with the environment variables and their descriptions:
+Sign and submit:
+{:ok, signed} = AnomaSDK.Transaction.sign(tx, private_key)
+{:ok, hash} = AnomaSDK.Transaction.submit(signed)
 
-| Variable                           | Description                                                         | Type        |
-|------------------------------------|---------------------------------------------------------------------|-------------|
-| `API_KEY_ALCHEMY`                  | Alchemy API key for blockchain node access and services             | String      |
-| `PRIVATE_KEY`                      | Private key for blockchain wallet/account (64-character hex string) | 64-char hex |
-| `PROTOCOL_ADAPTER_ADDRESS_SEPOLIA` | Contract address for the Protocol Adapter contract                  | String      |
-| `RISC0_DEV_MODE`                   | Generate proofs or use fake proofs.                                 | Boolean     |
-| `BONSAI_API_URL`                   | Bonsai URL                                                          | URL         |
-| `BONSAI_API_KEY`                   | Authentication key for Bonsai API access                            | String      |
+## ⚙️ Configuration
 
-To find the latest protocol adapter address, see here.
+Create .env file:
+export API_KEY_ALCHEMY="your-alchemy-api-key"
+export PRIVATE_KEY="your-private-key"
+export RISC0_DEV_MODE="true"
 
-> [!TIP]
-> If you want to try local development without actually submitting transactions to
-the protocol adapter, you can set `RISC0_DEV_MODE` to `true`. This will
-significantly speed up the proof generation. Note that the proofs are not valid.
+## 📚 Examples
+
+examples/counter - State machine example
+examples/token - ERC20 token operations
+examples/nft - NFT minting and trading
+examples/defi - DeFi protocols
+
+## 🔧 API Reference
+
+Full documentation: https://hexdocs.pm/anoma_sdk
+
+## 🤝 Contributing
+
+See CONTRIBUTING.md for guidelines.
